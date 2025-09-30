@@ -5,28 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 13:38:49 by aharder           #+#    #+#             */
-/*   Updated: 2025/09/30 01:21:02 by aharder          ###   ########.fr       */
+/*   Created: 2025/09/30 04:18:40 by aharder           #+#    #+#             */
+/*   Updated: 2025/09/30 04:20:15 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phonebook.hpp"
+#include "Harl.hpp"
 
 int main()
 {
-    std::string instruction;
-    phonebook      my_phonebook;
-    while (1)
-    {
-        std::cout << "Enter ADD, SEARCH, or EXIT\n";
-        std::cin >> instruction;
-        if (instruction.compare("ADD") == 0)
-            my_phonebook.add();
-        else if (instruction.compare("SEARCH") == 0)
-            my_phonebook.search();
-        else if (instruction.compare("EXIT") == 0)
-            break;
-        else
-            std::cout << "ERROR : please enter ADD, SEARCH, or EXIT\n";
-    }
+	Harl harl;
+
+	harl.complain("debug");
+	harl.complain("prout");
+	harl.complain("info");
+	harl.complain("error");
+	harl.complain("warning");
+	return (0);
 }
