@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 13:02:48 by aharder           #+#    #+#             */
-/*   Updated: 2025/07/01 14:23:52 by aharder          ###   ########.fr       */
+/*   Updated: 2025/10/01 00:09:25 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,13 @@ Fixed::Fixed(float const raw)
     float   dec_num;
 
     std::cout << "Float constructor called" << std::endl;
-    temp = (int)raw;
-    dec_num = raw - temp;
-    Fixed::value = roundf(raw);
+    Fixed::value = roundf(raw * (1 << Fixed::fract_bits));
+}
+
+Fixed::Fixed(int const raw)
+{
+	std::cout << "Int constructor called" << std::endl;
+	Fixed::value = raw << Fixed::fract_bits;
 }
 
 Fixed::Fixed(Fixed &to_copy)
@@ -54,3 +58,20 @@ Fixed::~Fixed()
 {
     std::cout << "Destructor called" << std::endl;
 }
+
+float   Fixed::toFloat(void) const
+{
+	return ((float)Fixed::value / (1 << Fixed::fract_bits));
+}
+
+int	 Fixed::toInt(void) const
+{
+	return (Fixed::value >> Fixed::fract_bits);
+}
+
+Fixed& Fixed::operator=(const Fixed &to_copy)
+	{
+		Fixed::value = to_copy.getRawBits();
+		std::cout << "Assignement operator called" << std::endl;
+		return *this;
+	}

@@ -6,12 +6,19 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 13:02:48 by aharder           #+#    #+#             */
-/*   Updated: 2025/07/01 13:43:24 by aharder          ###   ########.fr       */
+/*   Updated: 2025/10/01 00:03:39 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "Fixed.hpp"
+
+Fixed& Fixed::operator=(const Fixed &to_copy)
+    {
+        Fixed::value = to_copy.getRawBits();
+        std::cout << "Assignement operator called" << std::endl;
+        return *this;
+    }
 
 int     Fixed::getRawBits(void) const
 {

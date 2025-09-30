@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:54:25 by aharder           #+#    #+#             */
-/*   Updated: 2025/07/01 13:41:43 by aharder          ###   ########.fr       */
+/*   Updated: 2025/10/01 00:03:12 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,7 @@ private:
 public:
     Fixed();
     Fixed(Fixed &to_copy);
-    Fixed& operator=(const Fixed &to_copy)
-    {
-        Fixed::value = to_copy.getRawBits();
-        std::cout << "Assignement operator called" << std::endl;
-        return *this;
-    }
+    Fixed& operator=(const Fixed &to_copy);
     ~Fixed();
     int    getRawBits(void) const;
     void    setRawBits(int const raw);

@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:24:46 by aharder           #+#    #+#             */
-/*   Updated: 2025/07/01 15:25:44 by aharder          ###   ########.fr       */
+/*   Updated: 2025/10/01 00:36:42 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 class ClapTrap
 {
-private:
+protected:
     std::string name;
     unsigned int         health;
     unsigned int         energy;

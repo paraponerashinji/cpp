@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 15:28:32 by aharder           #+#    #+#             */
-/*   Updated: 2025/10/01 00:37:37 by aharder          ###   ########.fr       */
+/*   Created: 2025/10/01 00:20:52 by aharder           #+#    #+#             */
+/*   Updated: 2025/10/01 00:27:15 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 
-ScavTrap::ScavTrap(std::string name): ClapTrap(name, 100, 50, 20)
-{
-    std::cout << "ScavTrap constructor called" << std::endl;
-}
-
-ScavTrap::~ScavTrap()
-{
-    std::cout << "ScavTrap destructor called" << std::endl;
-}
-
-void    ScavTrap::guardGate()
-{
-    std::cout << "ScavTrap is now in gate keeper mode" << std::endl;
-}
+class FragTrap: public ClapTrap {
+    public:
+    FragTrap(std::string name);
+    ~FragTrap();
+    void	highFivesGuys(void);
+};
