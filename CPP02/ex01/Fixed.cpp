@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 13:02:48 by aharder           #+#    #+#             */
-/*   Updated: 2025/10/28 16:30:08 by aharder          ###   ########.fr       */
+/*   Updated: 2025/10/28 17:24:40 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ Fixed::Fixed(float const raw)
 Fixed::Fixed(int const raw)
 {
 	std::cout << "Int constructor called" << std::endl;
-	Fixed::value = raw << Fixed::fract_bits;
+	Fixed::value = roundf(raw * (pow(2, this->fract_bits)));
 }
 
 Fixed::~Fixed()
