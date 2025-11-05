@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alexandreharder <alexandreharder@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:48:16 by aharder           #+#    #+#             */
-/*   Updated: 2025/07/01 15:52:03 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/03 11:38:12 by alexandreha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 ScavTrap::ScavTrap(std::string name): ClapTrap(name, 100, 50, 10)
 {
+    this->name = name;
     std::cout << "ScavTrap Constructor called" << std::endl;
 }
 
@@ -24,5 +25,10 @@ ScavTrap::~ScavTrap()
 
 void    ScavTrap::guardGate()
 {
-    std::cout << "ScavTrap in guate keeping mode" << std::endl;
+    std::cout << "ScavTrap " << getName() << " is in gate keeping mode" << std::endl;
+}
+
+std::string ScavTrap::getName(void)
+{
+    return this->name;
 }
