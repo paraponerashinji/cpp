@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:32:12 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/11 12:39:23 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/11 12:58:36 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    HumanB::attack()
 {
-    std::cout << _name << " attacks with their " << _weapon.getType() << std::endl;
+    std::cout << _name << " attacks with " << _weapon.getType() << std::endl;
 }
 HumanB::~HumanB()
 {
@@ -23,8 +23,8 @@ HumanB::~HumanB()
 
 HumanB::HumanB(std::string _name)
 {
-    std::string weapon = "nothing";
-    HumanB::_weapon = weapon;
+    Weapon nothing = Weapon("nothing");
+    HumanB::setWeapon(nothing);
     HumanB::_name = _name;
 }
 

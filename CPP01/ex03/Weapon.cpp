@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:17:06 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/11 12:24:22 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/11 12:54:49 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,16 @@ Weapon::~Weapon()
     
 }
 
-std::string &Weapon::getType()
+std::string Weapon::getType()
 {
     std::string nothing = "nothing";
+    std::string &nothingREF = nothing;
     if (_type.empty())
-        return (nothing);
-    return (_type);
+    {
+        return (nothingREF);
+    }
+    const std::string &typeREF = _type;
+    return (typeREF);
 }
 
 void    Weapon::setType(std::string type)
