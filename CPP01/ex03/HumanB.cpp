@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:32:12 by aharder           #+#    #+#             */
-/*   Updated: 2025/06/25 15:04:38 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/11 12:39:23 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ HumanB::~HumanB()
 {
     
 }
-\
+
 HumanB::HumanB(std::string _name)
 {
+    std::string weapon = "nothing";
+    HumanB::_weapon = weapon;
     HumanB::_name = _name;
 }
 
