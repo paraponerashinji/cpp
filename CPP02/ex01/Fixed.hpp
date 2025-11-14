@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:54:25 by aharder           #+#    #+#             */
-/*   Updated: 2025/10/28 16:29:49 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/14 13:29:22 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ public:
     Fixed(float const raw);
     Fixed& operator=(const Fixed &to_copy);
     ~Fixed();
-    friend std::ostream& operator<<(std::ostream &out, const Fixed &f);
     float   toFloat(void) const;
     int     toInt(void) const;
     int    getRawBits(void) const;
     void    setRawBits(int const raw);
 };
+
+std::ostream& operator<<(std::ostream &out, const Fixed &f);

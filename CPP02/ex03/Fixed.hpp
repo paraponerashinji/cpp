@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:54:25 by aharder           #+#    #+#             */
-/*   Updated: 2025/10/28 17:02:37 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/14 13:45:57 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,13 @@ public:
     Fixed operator-(const Fixed &to_add);
     Fixed operator*(const Fixed &to_add);
     Fixed operator/(const Fixed &to_add);
+    bool operator>(const Fixed &to_compare);
+    bool operator>=(const Fixed &to_compare);
+    bool operator<(const Fixed &to_compare);
+    bool operator<=(const Fixed &to_compare);
+    bool operator==(const Fixed &to_compare);
+    bool operator!=(const Fixed &to_compare);
     ~Fixed();
-    friend std::ostream& operator<<(std::ostream &out, const Fixed &f);
     float   toFloat(void) const;
     static Fixed max(Fixed &f_one, Fixed &f_two);
     static Fixed max(const Fixed &f_one, const Fixed &f_two);
@@ -43,3 +48,5 @@ public:
     void    setRawBits(int const raw);
 
 };
+
+std::ostream& operator<<(std::ostream &out, const Fixed &f);

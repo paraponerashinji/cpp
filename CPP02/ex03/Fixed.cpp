@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 13:02:48 by aharder           #+#    #+#             */
-/*   Updated: 2025/10/28 17:24:10 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/14 13:48:39 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,12 @@ Fixed::Fixed(float const raw)
 {
     std::cout << "Float constructor called" << std::endl;
     Fixed::value = roundf(raw * (pow(2, this->fract_bits)));
-    std::cout << "[DEBUG] " << Fixed::toFloat() << std::endl;
 }
 
 Fixed::Fixed(int const raw)
 {
 	std::cout << "Int constructor called" << std::endl;
 	Fixed::value = roundf(raw * (pow(2, this->fract_bits)));
-    std::cout << "[DEBUG] " << Fixed::toInt() << std::endl;
 }
 
 Fixed::~Fixed()
@@ -120,6 +118,48 @@ Fixed Fixed::operator*(const Fixed &to_add)
 Fixed Fixed::operator/(const Fixed &to_add)
 {
     return (Fixed(Fixed::toFloat() / to_add.toFloat()));
+}
+
+bool Fixed::operator!=(const Fixed &to_compare)
+{
+    if (getRawBits() != to_compare.getRawBits())
+        return (true);
+    return (false);
+}
+
+bool Fixed::operator==(const Fixed &to_compare)
+{
+    if (getRawBits() == to_compare.getRawBits())
+        return (true);
+    return (false);
+}
+
+bool Fixed::operator<(const Fixed &to_compare)
+{
+    if (getRawBits() < to_compare.getRawBits())
+        return (true);
+    return (false);
+}
+
+bool Fixed::operator<=(const Fixed &to_compare)
+{
+    if (getRawBits() <= to_compare.getRawBits())
+        return (true);
+    return (false);
+}
+
+bool Fixed::operator>(const Fixed &to_compare)
+{
+    if (getRawBits() > to_compare.getRawBits())
+        return (true);
+    return (false);
+}
+
+bool Fixed::operator>=(const Fixed &to_compare)
+{
+    if (getRawBits() >= to_compare.getRawBits())
+        return (true);
+    return (false);
 }
 
 Fixed Fixed::max(const Fixed &f_one, const Fixed &f_two)

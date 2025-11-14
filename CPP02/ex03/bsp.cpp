@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bsp.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexandreharder <alexandreharder@studen    +#+  +:+       +#+        */
+/*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 22:59:03 by alexandreha       #+#    #+#             */
-/*   Updated: 2025/10/31 23:29:14 by alexandreha      ###   ########.fr       */
+/*   Updated: 2025/11/14 13:48:04 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
