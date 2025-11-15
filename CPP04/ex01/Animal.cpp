@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexandreharder <alexandreharder@studen    +#+  +:+       +#+        */
+/*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 12:18:40 by alexandreha       #+#    #+#             */
-/*   Updated: 2025/11/03 12:30:03 by alexandreha      ###   ########.fr       */
+/*   Updated: 2025/11/15 15:36:13 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Animal::Animal()
 {
-    this->type = "unknown animal";
+    _type = "unknown animal";
     std::cout << "Animal Constructor called" <<  std::endl;
 }
 
@@ -23,18 +23,13 @@ Animal::~Animal()
     std::cout << "Animal Destructor called" <<  std::endl;
 }
 
-Animal::Animal(std::string _type)
+Animal::Animal(std::string type)
 {
-    this->type = _type;
-    std::cout << "Animal of type " << this->type << " Constructor called" <<  std::endl;
-}
-
-void Animal::makeSound() const
-{
-    std::cout << "*loud and clear silence*" << std::endl;
+    _type = type;
+    std::cout << "Animal of type " << _type << " Constructor called" <<  std::endl;
 }
 
 std::string Animal::getType() const
 {
-    return this->type;
+    return _type;
 }

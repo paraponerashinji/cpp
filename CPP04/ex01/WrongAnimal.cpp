@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexandreharder <alexandreharder@studen    +#+  +:+       +#+        */
+/*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 12:33:19 by alexandreha       #+#    #+#             */
-/*   Updated: 2025/11/03 12:37:40 by alexandreha      ###   ########.fr       */
+/*   Updated: 2025/11/15 15:39:47 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 WrongAnimal::WrongAnimal()
 {
-    this->type = "unknown wrong animal";
+    _type = "unknown wrong animal";
     std::cout << "WrongAnimal Constructor called" <<  std::endl;
 }
 
-WrongAnimal::WrongAnimal(std::string _type)
+WrongAnimal::WrongAnimal(std::string type)
 {
-    this->type = _type;
-    std::cout << "WrongAnimal of type " << this->type << " Constructor called" <<  std::endl;
+    _type = type;
+    std::cout << "WrongAnimal of type " << _type << " Constructor called" <<  std::endl;
 }
 
 WrongAnimal::~WrongAnimal()
@@ -36,5 +36,5 @@ void WrongAnimal::makeSound() const
 
 std::string WrongAnimal::getType() const
 {
-    return this->type;
+    return _type;
 }
