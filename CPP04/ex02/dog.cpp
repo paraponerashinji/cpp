@@ -6,19 +6,19 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 12:26:06 by alexandreha       #+#    #+#             */
-/*   Updated: 2025/11/15 15:46:39 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/15 15:46:09 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dog.hpp"
 
-Dog::Dog(): Animal("Dog")
+Dog::Dog(): AAnimal("Dog")
 {
     this->brain = new Brain();
     std::cout << "Dog Constructor called" <<  std::endl;
 }
 
-Dog::Dog(const Dog &other): Animal(other)
+Dog::Dog(const Dog &other): AAnimal(other)
 {
     this->brain = new Brain(*(other.brain));
     std::cout << "Dog Copy Constructor called" <<  std::endl;
