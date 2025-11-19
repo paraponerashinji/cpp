@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 16:27:41 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/18 15:26:17 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/19 14:50:10 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int Bureaucrat::getGrade() const
     return (_grade);
 }
 
-void    Bureaucrat::signForm(Form &f)
+void    Bureaucrat::signForm(AForm &f)
 {
     try
     {

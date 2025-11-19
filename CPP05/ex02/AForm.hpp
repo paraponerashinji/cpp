@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:14:07 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/18 15:23:44 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/19 14:49:48 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ class AForm
         };
 };
 
-std::ostream& operator<<(std::ostream &out, Form &f);
+std::ostream& operator<<(std::ostream &out, AForm &f);
 #endif

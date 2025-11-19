@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:42:31 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/18 15:45:15 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/19 14:59:01 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <iostream>
 #include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm()
+ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyCreationForm", 25, 5)
 {
     _target = "default";
 }
@@ -30,8 +30,24 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 
 void    ShrubberyCreationForm::ExecuteProcedure()
 {
-    std::ofstream new_file(getTarget() + "_shrubbery");
+    std::ofstream new_file((getTarget() + "_shrubbery").c_str());
 
-    new_file << "" << std::endl;
+    new_file << "  ,-,              v .   ._, |_  .," << std::endl;
+    new_file << " /.(           `-._\\/  .  \\ /    |/_" << std::endl;
+    new_file << " \\ {               \\  _\\, y | \\//" << std::endl;
+    new_file << "  `-`         _\\_.___\\, \\/ -.\\||" << std::endl;
+    new_file << "               `7-,--.`._||  / / ," << std::endl;
+    new_file << "               /'     `-. `./ / |/_.'" << std::endl;
+    new_file << "                         |    |//" << std::endl;
+    new_file << "                         |_    /" << std::endl;
+    new_file << "                         |-   |" << std::endl;
+    new_file << "                         |   =|" << std::endl;
+    new_file << "                         |    |" << std::endl;
+    new_file << "------------------------/ ,  . \\--------._" << std::endl;
     new_file.close();
+}
+
+std::string ShrubberyCreationForm::getTarget()
+{
+    return _target;
 }
