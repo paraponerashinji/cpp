@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 16:27:41 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/19 14:50:10 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/19 19:09:28 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void    Bureaucrat::signForm(AForm &f)
     
 }
 
-std::string Bureaucrat::getName()
+std::string Bureaucrat::getName() const
 {
     return (_name);
 }

@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:06:37 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/19 17:17:09 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/19 19:04:59 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 #include "ShrubberyCreationForm.hpp"
 
 Intern::Intern()
-{
-    
+{   
 }
 
 Intern::~Intern()
 {
-    
 }
 
 Intern &Intern::operator=(Intern &other)
 {
+	(void)other;
+	return *this;
 }
 
 const char *Intern::UnknownFormException::what() const throw()
@@ -45,24 +45,22 @@ AForm *Intern::makeform(std::string name, std::string target)
 			break;
 		i++;
 	}
-	if (i == 4)
+	if (i == 3)
 	{
 			throw UnknownFormException();
-			return ;
 	}
+	std::cout << "Intern creates " << name << std::endl; 
 	switch (i)
 	{
 	case 0:
-		form = RobotomyRequestForm(target);
+		form = new RobotomyRequestForm(target);
 		break;
 	case 1:
-		this->info();
+		form = new PresidentialPardonForm(target);
 		break;
 	case 2:
-		this->warning();
-		break;
-	case 3:
-		this->error();
+		form = new ShrubberyCreationForm(target);
 		break;
 	}
+	return (form);
 }

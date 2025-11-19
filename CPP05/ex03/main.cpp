@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 16:38:20 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/19 15:03:20 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/19 19:07:13 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
 int main()
 {
@@ -74,23 +75,13 @@ int main()
     }
     std::cout << Jacques;
 
-    // FORM
+    // FORM AND INTERN
     
-    PresidentialPardonForm pardon_form("someone");
-    RobotomyRequestForm robotomy_form("evaluator");
-    ShrubberyCreationForm shrubbery_form("garden");
-
+    Intern Kevin;
+    AForm *form = Kevin.makeform("robotomy request", "evaluator");
     try
     {
-        shrubbery_form.beSigned(Marc);
-    }
-    catch(std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    try
-    {
-        shrubbery_form.execute(Marc);
+        form = Kevin.makeform("invalid request", "idk");
     }
     catch(std::exception &e)
     {
@@ -98,7 +89,7 @@ int main()
     }
     try
     {
-        shrubbery_form.beSigned(Jacques);
+        form->beSigned(Jacques);
     }
     catch(std::exception &e)
     {
@@ -106,42 +97,11 @@ int main()
     }
     try
     {
-        shrubbery_form.execute(Jacques);
+        form->execute(Jacques);
     }
     catch(std::exception &e)
     {
         std::cerr << e.what() << '\n';
     }
-    try
-    {
-        pardon_form.beSigned(Jacques);
-    }
-    catch(std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    try
-    {
-        pardon_form.execute(Jacques);
-    }
-    catch(std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-     try
-    {
-        robotomy_form.beSigned(Jacques);
-    }
-    catch(std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    try
-    {
-        robotomy_form.execute(Jacques);
-    }
-    catch(std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    delete form;
 }

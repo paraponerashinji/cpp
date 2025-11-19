@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 16:12:21 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/19 14:50:23 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/19 19:09:23 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ public:
     void        incrementGrade();
     int     getGrade() const;
     void    signForm(AForm &f);
-    std::string getName();
+    std::string getName() const;
     class GradeTooHighException: public std::exception
     {
         const char* what() const throw();

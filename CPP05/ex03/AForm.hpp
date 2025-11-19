@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:14:07 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/19 14:49:48 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/19 19:06:35 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class AForm
         const int         _grade_to_exec;
     public:
         AForm();
-        ~AForm();
+        virtual ~AForm();
         AForm(std::string name, int grade_to_sign, int grade_to_exec);
         std::string getName();
         bool        getSignedStatus();

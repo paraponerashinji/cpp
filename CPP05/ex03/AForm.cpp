@@ -6,7 +6,7 @@
 /*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:22:34 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/19 15:01:37 by aharder          ###   ########.fr       */
+/*   Updated: 2025/11/19 19:11:11 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void    AForm::execute(Bureaucrat const &b)
         throw FormNotSignedException();
     if (b.getGrade() <= _grade_to_exec)
         ExecuteProcedure();
+    else
+        throw GradeTooLowException();
 }
 
 std::ostream& operator<<(std::ostream &out, AForm &f)
