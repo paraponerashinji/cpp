@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   base.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexandreharder <alexandreharder@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 15:17:07 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/21 02:03:35 by alexandreha      ###   ########.fr       */
+/*   Created: 2025/12/11 21:24:52 by alexandreha       #+#    #+#             */
+/*   Updated: 2025/12/11 21:25:08 by alexandreha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ClapTrap.hpp"
+#include "base.hpp"
 
-class ScavTrap: virtual public ClapTrap {
-    private:
-        std::string name;
-    public:
-    ScavTrap();
-    ScavTrap(std::string name);
-    ~ScavTrap();
-    void    guardGate();
-};
+Base::~Base()
+{}

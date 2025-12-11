@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexandreharder <alexandreharder@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 15:17:07 by aharder           #+#    #+#             */
-/*   Updated: 2025/11/21 02:03:35 by alexandreha      ###   ########.fr       */
+/*   Created: 2025/12/08 23:08:15 by alexandreha       #+#    #+#             */
+/*   Updated: 2025/12/08 23:13:51 by alexandreha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ClapTrap.hpp"
+#include "ScalarConverter.hpp"
 
-class ScavTrap: virtual public ClapTrap {
-    private:
-        std::string name;
-    public:
-    ScavTrap();
-    ScavTrap(std::string name);
-    ~ScavTrap();
-    void    guardGate();
-};
+int main(int argc, char *argv[])
+{
+    if (argc != 2)
+    {
+        std::cout << "Bad input" << std::endl;
+        return (1);
+    }
+    ScalarConverter::convert(argv[1]);
+    return (0);
+}
