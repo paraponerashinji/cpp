@@ -5,20 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexandreharder <alexandreharder@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/08 23:08:15 by alexandreha       #+#    #+#             */
-/*   Updated: 2025/12/08 23:13:51 by alexandreha      ###   ########.fr       */
+/*   Created: 2025/12/10 14:21:29 by alexandreha       #+#    #+#             */
+/*   Updated: 2025/12/10 14:26:34 by alexandreha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#include "serializer.hpp"
 
-int main(int argc, char *argv[])
+int main()
 {
-    if (argc != 2)
-    {
-        std::cout << "Bad input" << std::endl;
-        return (1);
-    }
-    ScalarConverter::convert(argv[1]);
-    return (0);
+    Data D;
+    uintptr_t ptr;
+    D.i = 8;
+    D.str = "Hey";
+
+    std::cout << D.i << " " << D.str << std::endl;
+    ptr = serializer::serialize(&D);
+    std::cout << ptr << std::endl;
+    Data *D2 = serializer::deserialize(ptr);
+    std::cout << D2->i << " " << D2->str << std::endl;
 }

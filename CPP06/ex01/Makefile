@@ -1,7 +1,7 @@
-SRCS = main.cpp ScalarConverter.cpp
-INC = ScalarConverter.hpp
+SRCS = main.cpp serializer.cpp
+INC = serializer.hpp
 OBJS = $(SRCS:.cpp=.o)
-NAME = ScalarConverter
+NAME = Serializer
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -I$(INC)
 RM = rm -f

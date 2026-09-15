@@ -1,7 +1,7 @@
-SRCS = main.cpp base.cpp
-INC = base.hpp
+SRCS = main.cpp
+INC = MutantStack.hpp
 OBJS = $(SRCS:.cpp=.o)
-NAME = Indentify
+NAME = Bureaucrat
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -I$(INC)
 RM = rm -f

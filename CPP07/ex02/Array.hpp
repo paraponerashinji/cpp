@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexandreharder <alexandreharder@studen    +#+  +:+       +#+        */
+/*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 12:55:49 by alexandreha       #+#    #+#             */
-/*   Updated: 2025/12/16 16:07:45 by alexandreha      ###   ########.fr       */
+/*   Updated: 2026/08/11 14:55:24 by aharder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ public:
     {
         if (this == &array)
             return *this;
-        if (_elements != NULL)
-            delete []_elements;
+        //delete []_elements;
         _size = array.getsize();
         _elements = new T[_size];
         for (size_t i = 0; i < _size; i++)

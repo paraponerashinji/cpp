@@ -14,10 +14,10 @@ int main(int, char**)
         std::cout << numbers[i] << " " << mirror[i] << std::endl;
     }
     //SCOPE
-    /*{
+    {
         Array<int> tmp = numbers;
         Array<int> test(tmp);
-    }*/
+    }
     std::cout << "Comparaison" << std::endl;
     for (int i = 0; i < MAX_VAL; i++)
     {
