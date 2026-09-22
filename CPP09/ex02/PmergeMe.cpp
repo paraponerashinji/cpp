@@ -5,14 +5,12 @@ PmergeMe::PmergeMe(int ac, char **av){
     std::deque<int> inputDeque;
     std::list<int> inputList;
 
-    // fill the containers with random integers
-    srand(time(NULL));
     for (int i = 1; i < ac; ++i)
     {
         int value = atoi(av[i]);
         if (value <= 0)
         {
-            std::cerr << "Error: Invalid input value \"" << av[i] << "\". Only positive integers are allowed." << std::endl;
+            std::cerr << "Error: Invalid input value \"" << av[i] << "\"." << std::endl;
 			exit(1);
         }
         inputDeque.push_back(value);
@@ -53,14 +51,21 @@ void PmergeMe::display(const T& container)
 void PmergeMe::mergeInsertSortDeque(std::deque<int>& arr)
 {
     std::deque<int>::iterator it1, it2;
-    for (it1 = arr.begin() + 1; it1 != arr.end(); ++it1)
+    for (it1 = ++arr.begin(); it1 != arr.end(); ++it1)
     {
         int temp = *it1;
         it2 = it1;
-        while (it2 != arr.begin() && *(std::prev(it2)) > temp)
+        while (it2 != arr.begin())
         {
-            *it2 = *(std::prev(it2));
-            std::advance(it2, -1);
+            std::deque<int>::iterator prev = it2;
+            --prev;
+            if (*prev > temp)
+            {
+                *it2 = *prev;
+                it2 = prev;
+            }
+            else
+                break;
         }
         *it2 = temp;
     }
@@ -73,10 +78,17 @@ void PmergeMe::mergeInsertSortList(std::list<int>& arr)
     {
         int temp = *it1;
         it2 = it1;
-        while (it2 != arr.begin() && *(std::prev(it2)) > temp)
+        while (it2 != arr.begin())
         {
-            *it2 = *(std::prev(it2));
-            std::advance(it2, -1);
+            std::list<int>::iterator prev = it2;
+            --prev;
+            if (*prev > temp)
+            {
+                *it2 = *prev;
+                it2 = prev;
+            }
+            else
+                break;
         }
         *it2 = temp;
     }

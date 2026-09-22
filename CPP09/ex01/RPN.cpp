@@ -10,11 +10,6 @@ RPN::~RPN()
 	return;
 }
 
-RPN::RPN(std::stack<double> number)
-{
-	this->numbers = number;
-}
-
 RPN::RPN(const RPN &var)
 {
 	*this = var;
@@ -28,60 +23,52 @@ RPN &RPN::operator=(const RPN &var)
 
 void RPN::calculate(std::string input)
 {
-	for (size_t i = 0; i < input.size(); i++)
-	{
-		char c = input[i];
+	std::stringstream ss(input);
+    std::string c;
 
-		if (c == ' ')
-		{
-			// skip whitespace
-			continue;
-		}
-		else if (isdigit(c))
-		{
-			int number = c - '0';
-			numbers.push(number);
-		}
-		else if (c == '+' && numbers.size() >= 2)
-		{
-			double b = numbers.top();
-			numbers.pop();
-			double a = numbers.top();
-			numbers.pop();
-			numbers.push(a + b);
-		}
-		else if (c == '-' && numbers.size() >= 2)
-		{
-			double b = numbers.top();
-			numbers.pop();
-			double a = numbers.top();
-			numbers.pop();
-			numbers.push(a - b);
-		}
-		else if (c == '*' && numbers.size() >= 2)
-		{
-			double b = numbers.top();
-			numbers.pop();
-			double a = numbers.top();
-			numbers.pop();
-			numbers.push(a * b);
-		}
-		else if (c == '/' && numbers.size() >= 2)
-		{
-			double b = numbers.top();
-			numbers.pop();
-			double a = numbers.top();
-			numbers.pop();
-			numbers.push(a / b);
-		}
+    while (ss >> c)
+	{
+		if (c.size() == 1 && (c == "+" || c == "-" || c == "*" || c == "/"))
+        {
+            if (numbers.size() < 2)
+            {
+                std::cout << "Invalid input." << std::endl;
+                return;
+            }
+
+            int b = numbers.top();
+            numbers.pop();
+            int a = numbers.top();
+            numbers.pop();
+
+            if (c == "+")
+                numbers.push(a + b);
+            else if (c == "-")
+                numbers.push(a - b);
+            else if (c == "*")
+                numbers.push(a * b);
+            else if (c == "/")
+                numbers.push(a / b);
+        }
 		else
-		{
-			// invalid character or insufficient operands
-			std::cout << "Invalid input." << std::endl;
-			return;
+        {
+            std::stringstream numberStream(c);
+            int value;
+            char extra;
+
+            if (!(numberStream >> value) || (numberStream >> extra))
+            {
+                std::cout << "Invalid input." << std::endl;
+                return;
+            }
+			if (value >= 10)
+			{
+                std::cout << "Invalid input." << std::endl;
+                return;
+            }
+        	numbers.push(value);
 		}
 	}
-
 	if (numbers.size() == 1)
 	{
 		double result = numbers.top();
@@ -90,7 +77,6 @@ void RPN::calculate(std::string input)
 	}
 	else
 	{
-		// insufficient operands
 		std::cout << "Invalid input." << std::endl;
 	}
 }

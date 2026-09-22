@@ -12,7 +12,6 @@ class Btc
 {
 private:
 	std::map <std::string, float> data;
-	int readFlag;
 public:
 	Btc();
 	~Btc();

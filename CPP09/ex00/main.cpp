@@ -6,7 +6,7 @@ int main(int ac , char *av[])
 	if (ac != 2)
 	{
 		std::cerr << "File Not Open" << std::endl;
-		return (EXIT_FAILURE);
+		return (0);
 	}
 	Btc btc;
 

@@ -1,50 +1,36 @@
-<<<<<<< HEAD
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aharder <aharder@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/07 13:41:13 by aharder           #+#    #+#             */
-/*   Updated: 2026/08/07 13:41:18 by aharder          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-=======
 #include "BitcoinExchange.hpp"
 
-// Whitespace characters to remove (space, tab, newline, carriage return)
-const char* WHITESPACE = " \t\n\r";
-
-// Trim whitespace characters from the beginning of a string
-static std::string& ltrim(std::string& s)
+static std::string trim(const std::string &str)
 {
-    s.erase(0, s.find_first_not_of(WHITESPACE));
-    return s;
+	size_t start = str.find_first_not_of(" \t\n\r");
+	if (start == std::string::npos)
+		return "";
+	size_t end = str.find_last_not_of(" \t\n\r");
+	return str.substr(start, end - start + 1);
 }
 
-// Trim whitespace characters from the end of a string
-static std::string& rtrim(std::string& s)
+static bool stringToDouble(const std::string &str, double &value)
 {
-    s.erase(s.find_last_not_of(WHITESPACE) + 1);
-    return s;
+	std::stringstream ss(str);
+	ss >> value;
+	if (ss.fail())
+		return false;
+	return true;
 }
 
-// Trim whitespace characters from both ends of a string
-static std::string& trim(std::string& s)
-{
-    return ltrim(rtrim(s));
-}
-
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <map>
+#include <string>
+#include <vector>
+#include <cctype>
 Btc::Btc()
 {
 	int i = 0;
-	this->readFlag = 1;
 	std::ifstream file("./data.csv");
 	if (!file.is_open())
 	{
-		this->readFlag = 0;
 		return;
 	}
 	std::string line;
@@ -58,18 +44,16 @@ Btc::Btc()
 		size_t pos = line.find(',');
 		if (pos == std::string::npos)
 		{
-			std::cerr << "Error : Invalid Paramter" << std::endl;
+			std::cerr << "Error : Invalid parsing" << std::endl;
 			continue;
 		}
 		std::string date = line.substr(0, pos);
         double value;
-        try {
-            value = std::stod(line.substr(pos + 1));
-        } catch (std::exception &a) {
-			(void)a;
-            std::cerr << "Error: could not parse value" << std::endl;
-            continue;
-        }
+		if (!stringToDouble(trim(line.substr(pos + 1)), value))
+		{
+			std::cerr << "Error : Invalid parsing" << std::endl;
+			continue;
+		}
 		this->setData(date, value);
 	}
 	file.close();
@@ -126,15 +110,14 @@ std::vector<std::string> Btc::splitString(std::string str, char delimiter)
 void Btc::readInput(std::string inputPath)
 {
 	int i = 0;
-	std::ifstream file2(inputPath);
-	if (!file2.is_open())
+	std::ifstream file(inputPath.c_str());
+	if (!file.is_open())
 	{
-		this->readFlag = -1;
 		return;
 	}
 	std::string line;
 	std::vector<std::string> vectorLine;
-	while(std::getline(file2, line))
+	while(std::getline(file, line))
 	{
 		if (i == 0)
 		{
@@ -147,31 +130,34 @@ void Btc::readInput(std::string inputPath)
 			std::cout << "Error: bad input => " << vectorLine[0] << std::endl;
 			continue;
 		}
-		std::map<std::string, float>::iterator it = this->data.upper_bound(trim(vectorLine[0]));
-		if (it != this->data.end()) {
-	        std::pair<std::string, float> p = *(--it);
-			try
-			{
-				if (std::stod(vectorLine[1]) > 1000)
-				{
-					std::cout << "Error: too large a number." << std::endl;
-				}
-				else if (std::stod(vectorLine[1]) < 0)
-				{
-					std::cout << "Error: not a positive number." << std::endl;
-				}
-				else
-		        	std::cout << vectorLine[0] << " => " << vectorLine[1] << " = " << std::stod(vectorLine[1]) * p.second << std::endl;
+		vectorLine[0] = trim(vectorLine[0]);
+		vectorLine[1] = trim(vectorLine[1]);
 
-			}catch (const std::exception &e)
-			{
-				(void)e;
-				std::cout << "Error : Input Not A Number" << std::endl;
-				continue;
-			}
+		double amount;
+		if (!stringToDouble(vectorLine[1], amount))
+		{
+			std::cout << "Error : Input Not A Number" << std::endl;
+			continue;
 		}
+		if (amount < 0)
+		{
+			std::cout << "Error: not a positive number." << std::endl;
+			continue;
+		}
+		if (amount > 1000)
+		{
+			std::cout << "Error: too large a number." << std::endl;
+			continue;
+		}
+		std::map<std::string, float>::iterator it = this->data.upper_bound(vectorLine[0]);
+		if (it == this->data.begin())
+		{
+			std::cout << "Error: no lower date found." << std::endl;
+			continue;
+		}
+		--it;
+		std::cout << vectorLine[0] << " => " << amount << " = " << amount * it->second << std::endl;
 
 	}
-	file2.close();
+	file.close();
 }
->>>>>>> 04a2066eee1b1123fb7e047e6bf8121b2e435ed2
