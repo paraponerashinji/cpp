@@ -1,5 +1,34 @@
 #include "PmergeMe.hpp"
 
+static bool parsePositiveInt(const char *input, int &value)
+{
+    char *end = NULL;
+    long parsed = std::strtol(input, &end, 10);
+    if (input[0] == '\0' || *end != '\0' || parsed <= 0 || parsed > 2147483647L)
+        return false;
+    value = static_cast<int>(parsed);
+    return true;
+}
+
+bool compareNodes(const Node& a, const Node& b) {
+    return a.value < b.value;
+}
+
+PmergeMe::PmergeMe() {}
+
+PmergeMe::PmergeMe(const PmergeMe& other)
+{
+	(void)other;
+}
+
+PmergeMe& PmergeMe::operator=(const PmergeMe& other)
+{
+	(void)other;
+	return *this;
+}
+
+PmergeMe::~PmergeMe() {}
+
 void addJacobsthalOrder(std::vector<size_t>& order, size_t size)
 {
     if (size == 0)
@@ -30,18 +59,18 @@ void addJacobsthalOrder(std::vector<size_t>& order, size_t size)
 PmergeMe::PmergeMe(int ac, char **av){
 
     std::deque<int> inputDeque;
-    std::list<int> inputList;
-
+    std::vector<int> inputVector;
     for (int i = 1; i < ac; ++i)
     {
-        int value = atoi(av[i]);
-        if (value <= 0)
+        int value = 0;
+        if (!parsePositiveInt(av[i], value))
         {
             std::cerr << "Error: Invalid input value \"" << av[i] << "\"." << std::endl;
 			exit(1);
         }
         inputDeque.push_back(value);
-        inputList.push_back(value);
+        inputVector.push_back(value);
+
     }
     std::cout << "Before: ";
     display(inputDeque);
@@ -49,21 +78,18 @@ PmergeMe::PmergeMe(int ac, char **av){
     clock_t start1 = clock();
     mergeInsertSortDeque(inputDeque);
     clock_t end1 = clock();
-    double time1 = static_cast<double>(end1 - start1) / CLOCKS_PER_SEC * 1000;
-
+    double time1 = static_cast<double>(end1 - start1) * 1000000.0 / CLOCKS_PER_SEC;
     clock_t start2 = clock();
-    mergeInsertSortList(inputList);
+    mergeInsertSortVector(inputVector);
     clock_t end2 = clock();
-    double time2 = static_cast<double>(end2 - start2) / CLOCKS_PER_SEC * 1000;
+    double time2 = static_cast<double>(end2 - start2) * 1000000.0 / CLOCKS_PER_SEC;
 
-    std::cout << "After: ";
+    std::cout << "Deque After: ";
     display(inputDeque);
     std::cout << "Time to process a range of " << inputDeque.size() << " elements with std::deque container: " << time1 << " us" << std::endl;
-    std::cout << "Time to process a range of " << inputList.size() << " elements with std::list container: " << time2 << " us" << std::endl;
-    if (inputDeque == std::deque<int>(inputList.begin(), inputList.end()))
-        std::cout << "The sorted sequences are equal." << std::endl;
-    else
-        std::cout << "The sorted sequences are not equal." << std::endl;
+    std::cout << "Vector After: ";
+    display(inputVector);
+    std::cout << "Time to process a range of " << inputDeque.size() << " elements with std::vector container: " << time2 << " us" << std::endl;
 }
 
 void PmergeMe::mergeInsertSortDeque(std::deque<int>& arr)
@@ -77,13 +103,13 @@ void PmergeMe::mergeInsertSortDeque(std::deque<int>& arr)
         arr.push_back(it->value);
 }
 
-void PmergeMe::mergeInsertSortList(std::list<int>& arr)
+void PmergeMe::mergeInsertSortVector(std::vector<int>& arr)
 {
-    std::list<Node> nodes;
-    for (std::list<int>::const_iterator it = arr.begin(); it != arr.end(); ++it)
+    std::vector<Node> nodes;
+    for (std::vector<int>::const_iterator it = arr.begin(); it != arr.end(); ++it)
         nodes.push_back(Node(*it, static_cast<int>(nodes.size())));
     fordJohnson(nodes);
     arr.clear();
-    for (std::list<Node>::const_iterator it = nodes.begin(); it != nodes.end(); ++it)
+    for (std::vector<Node>::const_iterator it = nodes.begin(); it != nodes.end(); ++it)
         arr.push_back(it->value);
 }

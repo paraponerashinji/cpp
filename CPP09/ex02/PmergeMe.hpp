@@ -18,25 +18,36 @@ struct Node
 		: value(value), id(id), partnerId(-1) {}
 };
 
+bool compareNodes(const Node& a, const Node& b);
 void addJacobsthalOrder(std::vector<size_t>& order, size_t pendingSize);
 
 
 class PmergeMe
 {
 	public:
+	PmergeMe();
 	PmergeMe(int ac, char **av);
+	PmergeMe(const PmergeMe& other);
+	PmergeMe& operator=(const PmergeMe& other);
+	~PmergeMe();
 	template <typename T>
 	void display(const T& container);
 	void mergeInsertSortDeque(std::deque<int>& arr);
-	void mergeInsertSortList(std::list<int>& arr);
+	void mergeInsertSortVector(std::vector<int>& arr);
 };
 
 template <typename T>
 void PmergeMe::display(const T& container)
 {
 	typename T::const_iterator it;
+	bool first = true;
 	for (it = container.begin(); it != container.end(); ++it)
-		std::cout << *it << " ";
+	{
+		if (!first)
+			std::cout << ' ';
+		std::cout << *it;
+		first = false;
+	}
 	std::cout << std::endl;
 }
 
@@ -56,7 +67,7 @@ void fordJohnson(Container& sequence)
 		return;
 
 	Container winners;
-	std::vector<Node> pending;
+	Container pending;
 	typename Container::iterator it = sequence.begin();
 	while (it != sequence.end())
 	{
@@ -94,9 +105,7 @@ void fordJohnson(Container& sequence)
 	{
 		Node& node = pending[order[i]];
 		typename Container::iterator partner = findById(sequence, node.partnerId);
-		typename Container::iterator insertion = sequence.begin();
-		while (insertion != partner && insertion->value < node.value)
-			++insertion;
+		typename Container::iterator insertion = std::lower_bound(sequence.begin(), partner, node, compareNodes);
 		sequence.insert(insertion, node);
 	}
 
