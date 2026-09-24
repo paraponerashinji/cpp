@@ -1,19 +1,19 @@
 #include "PmergeMe.hpp"
 
-void addJacobsthalOrder(std::vector<size_t>& order, size_t pendingSize)
+void addJacobsthalOrder(std::vector<size_t>& order, size_t size)
 {
-    if (pendingSize == 0)
+    if (size == 0)
         return;
     order.push_back(0);
 
     size_t lower = 1;
-    size_t previousBoundary = 0;
-    size_t boundary = 2;
-    while (lower < pendingSize)
+    size_t previous_limit = 0;
+    size_t limit = 2;
+    while (lower < size)
     {
-        size_t upper = boundary;
-        if (upper >= pendingSize)
-            upper = pendingSize - 1;
+        size_t upper = limit;
+        if (upper >= size)
+            upper = size - 1;
         for (size_t index = upper; index >= lower; --index)
         {
             order.push_back(index);
@@ -21,9 +21,9 @@ void addJacobsthalOrder(std::vector<size_t>& order, size_t pendingSize)
                 break;
         }
         lower = upper + 1;
-        size_t currentBoundary = boundary;
-        boundary = 2 * boundary + previousBoundary;
-        previousBoundary = currentBoundary;
+        size_t currentlimit = limit;
+        limit = 2 * limit + previous_limit;
+        previous_limit = currentlimit;
     }
 }
 

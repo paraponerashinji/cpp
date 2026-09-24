@@ -31,6 +31,15 @@ class PmergeMe
 	void mergeInsertSortList(std::list<int>& arr);
 };
 
+template <typename T>
+void PmergeMe::display(const T& container)
+{
+	typename T::const_iterator it;
+	for (it = container.begin(); it != container.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+}
+
 template <typename Container>
 typename Container::iterator findById(Container& container, int id)
 {
@@ -76,15 +85,14 @@ void fordJohnson(Container& sequence)
 	fordJohnson(winners);
 	sequence = winners;
 
-	const bool hasOdd = !pending.empty() && pending.back().partnerId == -1;
 	size_t pairCount = pending.size();
-	if (hasOdd)
+	if (!pending.empty() && pending.back().partnerId == -1)
 		--pairCount;
 	std::vector<size_t> order;
 	addJacobsthalOrder(order, pairCount);
 	for (size_t i = 0; i < order.size(); ++i)
 	{
-		const Node& node = pending[order[i]];
+		Node& node = pending[order[i]];
 		typename Container::iterator partner = findById(sequence, node.partnerId);
 		typename Container::iterator insertion = sequence.begin();
 		while (insertion != partner && insertion->value < node.value)
@@ -92,21 +100,12 @@ void fordJohnson(Container& sequence)
 		sequence.insert(insertion, node);
 	}
 
-	if (hasOdd)
+	if (!pending.empty() && pending.back().partnerId == -1)
 	{
-		const Node& odd = pending.back();
+		Node& odd = pending.back();
 		typename Container::iterator oddIt = sequence.begin();
 		while (oddIt != sequence.end() && oddIt->value < odd.value)
 			++oddIt;
 		sequence.insert(oddIt, odd);
 	}
-}
-
-template <typename T>
-void PmergeMe::display(const T& container)
-{
-	typename T::const_iterator it;
-	for (it = container.begin(); it != container.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
 }
