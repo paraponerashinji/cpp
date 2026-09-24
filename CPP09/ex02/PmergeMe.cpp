@@ -1,5 +1,32 @@
 #include "PmergeMe.hpp"
 
+void addJacobsthalOrder(std::vector<size_t>& order, size_t pendingSize)
+{
+    if (pendingSize == 0)
+        return;
+    order.push_back(0);
+
+    size_t lower = 1;
+    size_t previousBoundary = 0;
+    size_t boundary = 2;
+    while (lower < pendingSize)
+    {
+        size_t upper = boundary;
+        if (upper >= pendingSize)
+            upper = pendingSize - 1;
+        for (size_t index = upper; index >= lower; --index)
+        {
+            order.push_back(index);
+            if (index == lower)
+                break;
+        }
+        lower = upper + 1;
+        size_t currentBoundary = boundary;
+        boundary = 2 * boundary + previousBoundary;
+        previousBoundary = currentBoundary;
+    }
+}
+
 PmergeMe::PmergeMe(int ac, char **av){
 
     std::deque<int> inputDeque;
@@ -39,57 +66,24 @@ PmergeMe::PmergeMe(int ac, char **av){
         std::cout << "The sorted sequences are not equal." << std::endl;
 }
 
-template <typename T>
-void PmergeMe::display(const T& container)
-{
-    typename T::const_iterator it;
-    for (it = container.begin(); it != container.end(); ++it)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-}
-
 void PmergeMe::mergeInsertSortDeque(std::deque<int>& arr)
 {
-    std::deque<int>::iterator it1, it2;
-    for (it1 = ++arr.begin(); it1 != arr.end(); ++it1)
-    {
-        int temp = *it1;
-        it2 = it1;
-        while (it2 != arr.begin())
-        {
-            std::deque<int>::iterator prev = it2;
-            --prev;
-            if (*prev > temp)
-            {
-                *it2 = *prev;
-                it2 = prev;
-            }
-            else
-                break;
-        }
-        *it2 = temp;
-    }
+    std::deque<Node> nodes;
+    for (std::deque<int>::const_iterator it = arr.begin(); it != arr.end(); ++it)
+        nodes.push_back(Node(*it, static_cast<int>(nodes.size())));
+    fordJohnson(nodes);
+    arr.clear();
+    for (std::deque<Node>::const_iterator it = nodes.begin(); it != nodes.end(); ++it)
+        arr.push_back(it->value);
 }
 
 void PmergeMe::mergeInsertSortList(std::list<int>& arr)
 {
-    std::list<int>::iterator it1, it2;
-    for (it1 = ++arr.begin(); it1 != arr.end(); ++it1)
-    {
-        int temp = *it1;
-        it2 = it1;
-        while (it2 != arr.begin())
-        {
-            std::list<int>::iterator prev = it2;
-            --prev;
-            if (*prev > temp)
-            {
-                *it2 = *prev;
-                it2 = prev;
-            }
-            else
-                break;
-        }
-        *it2 = temp;
-    }
+    std::list<Node> nodes;
+    for (std::list<int>::const_iterator it = arr.begin(); it != arr.end(); ++it)
+        nodes.push_back(Node(*it, static_cast<int>(nodes.size())));
+    fordJohnson(nodes);
+    arr.clear();
+    for (std::list<Node>::const_iterator it = nodes.begin(); it != nodes.end(); ++it)
+        arr.push_back(it->value);
 }
