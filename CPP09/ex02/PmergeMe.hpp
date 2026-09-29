@@ -20,7 +20,7 @@ struct Node
 
 bool compareNodes(const Node& a, const Node& b);
 void addJacobsthalOrder(std::vector<size_t>& order, size_t pendingSize);
-
+bool parsePositiveInt(const char *input, int &value);
 
 class PmergeMe
 {
@@ -58,6 +58,29 @@ typename Container::iterator findById(Container& container, int id)
 	while (it != container.end() && it->id != id)
 		++it;
 	return it;
+}
+
+template <typename Container>
+bool isSorted(const Container& container)
+{
+    if (container.empty())
+        return true;
+
+    typename Container::const_iterator current = container.begin();
+    typename Container::const_iterator next = current;
+    ++next;
+
+    while (next != container.end())
+    {
+        if (*current > *next)
+        {
+            std::cerr << "Erreur : " << *current << " est supérieur à " << *next << std::endl;
+            return false;
+        }
+        ++current;
+        ++next;
+    }
+    return true;
 }
 
 template <typename Container>
